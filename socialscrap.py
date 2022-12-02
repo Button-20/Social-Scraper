@@ -19,7 +19,6 @@ def getInstagramProfile():
     try:
         #Create an instance of Instaloader class
         insta = instagram.Instaloader()
-        insta.login('_sound.it_gh', 'Godislove123_Sound.it2020')
         username = str(request.args.get('username'))
         print(username)
         profile = instagram.Profile.from_username(insta.context, username)
