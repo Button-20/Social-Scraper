@@ -1,10 +1,7 @@
+from flask import *
+import instaloader as instagram
 import json
 
-import instaloader as instagram
-from flask import *
-
-#Create an instance of Instaloader class
-insta = instagram.Instaloader()
 
 app = Flask(__name__)
 
@@ -20,8 +17,10 @@ def home_page():
 @app.route('/instagram/', methods=['GET'])
 def getInstagramProfile():
     try:
+        #Create an instance of Instaloader class
+        insta = instagram.Instaloader()
         username = str(request.args.get('username'))
-
+        print(username)
         profile = instagram.Profile.from_username(insta.context, username)
         data = {
             "username": profile.username,
