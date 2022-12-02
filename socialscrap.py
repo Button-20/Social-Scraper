@@ -1,7 +1,7 @@
-from flask import *
-import instaloader as instagram
 import json
 
+import instaloader as instagram
+from flask import *
 
 app = Flask(__name__)
 
