@@ -1,1 +1,1 @@
-web: gunicorn socialscrap:app --log-file -
+web: gunicorn socialscrap:app --log-file
