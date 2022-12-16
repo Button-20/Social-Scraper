@@ -1,26 +1,22 @@
-import json
-
+from fastapi import FastAPI
 import instaloader as instagram
-from flask import *
 
-app = Flask(__name__)
+app = FastAPI()
 
-@app.route('/', methods=['GET'])
+@app.get('/')
 def home_page():
     data_set = {
         'message': 'Uhh 😰!!!!! You are lost!'
     }
-    json_dump = json.dumps(data_set)
+    # json_dump = json.dumps(data_set)
 
-    return json_dump
+    return data_set
 
-@app.route('/instagram/', methods=['GET'])
-def getInstagramProfile():
+@app.get('/instagram/{username}')
+def getInstagramProfile(username: str):
     try:
         #Create an instance of Instaloader class
         insta = instagram.Instaloader()
-        username = str(request.args.get('username'))
-        print(username)
         profile = instagram.Profile.from_username(insta.context, username)
         data = {
             "username": profile.username,
@@ -32,17 +28,10 @@ def getInstagramProfile():
             "external_url": profile.external_url,
             "profile_pic_url": profile.profile_pic_url
         }
-        json_dump = json.dumps(data)
-
-        return json_dump
+        return data
     except:
         data_set = {
             'message': 'Error Occured!'
         }
-        json_dump = json.dumps(data_set)
-
-if __name__ == '__main__':
-    app.run()
-    app.debug = True
-
+        return data_set
 
