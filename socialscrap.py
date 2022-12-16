@@ -3,7 +3,6 @@ import instaloader as instagram
 
 app = FastAPI()
 
-
 @app.get('/')
 def home_page():
     data_set = {
@@ -13,12 +12,13 @@ def home_page():
 
     return data_set
 
-
 @app.get('/instagram/{username}')
 def getInstagramProfile(username: str):
     try:
-        # Create an instance of Instaloader class
-        insta = instagram.Instaloader(quiet=True)
+        #Create an instance of Instaloader class
+        insta = instagram.Instaloader().login(
+            '_sound.it_gh', 'Godislove123_sound.it2020###*'
+        )
         profile = instagram.Profile.from_username(insta.context, username)
         data = {
             "username": profile.username,
@@ -36,3 +36,4 @@ def getInstagramProfile(username: str):
             'message': 'Error Occured!'
         }
         return data_set
+
