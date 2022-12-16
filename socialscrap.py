@@ -16,7 +16,9 @@ def home_page():
 def getInstagramProfile(username: str):
     try:
         #Create an instance of Instaloader class
-        insta = instagram.Instaloader()
+        insta = instagram.Instaloader({
+            'quiet': True,
+        })
         profile = instagram.Profile.from_username(insta.context, username)
         data = {
             "username": profile.username,
